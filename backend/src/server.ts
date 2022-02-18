@@ -4,7 +4,7 @@ import cors from 'cors';
 import { log } from './assets/logger';
 import { requestLogger } from './assets/expressRequestLogger';
 import users from './routes/users';
-import tasks from './routes/tasks';
+import tasks from './routes/tasks/tasks';
 
 const PORT = 80;
 
