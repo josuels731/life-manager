@@ -10,7 +10,7 @@ type TaskType = {
     priority: number,
     createdAt: Date
     finishedAt?: Date,
-    dueAt: Date,
+    dueAt?: Date,
 };
 
 const TaskModel = model<TaskType>(
@@ -56,7 +56,7 @@ const TaskModel = model<TaskType>(
             type: Date
         },
         dueAt: {
-            required: true,
+            required: false,
             type: Date
         }
     }, {})
