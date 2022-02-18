@@ -65,7 +65,7 @@ const newUser = async (req: RequestNewUser, res: Response<ResponseNewUser>) => {
         name: Joi.string().required(),
         email: Joi.string().email().required(),
         username: Joi.string().required().min(5).max(50),
-        password: Joi.string().required().min(8).max(24).regex(/[A-Z]/).regex(/[a-z]/).regex(/\d/).regex(/\W/),
+        password: Joi.string().required().min(8).max(24).regex(/[A-Z]/).regex(/[a-z]/).regex(/\d/).regex(/\W/).messages({ "string.pattern.base": '{{#label}} fails to match the pattern: {{#regex}}' }),
         birth: Joi.date().required().iso()
     });
     const validation = schema.validate(req.body);
