@@ -1,6 +1,6 @@
 import { Response, Request } from 'express'
 import Joi from 'joi';
-import TaskModel from '../model/tasks/Task';
+import TaskModel, { TaskType } from '../../model/tasks/Task';
 
 interface RequestNewTask extends Request {
     body: {
@@ -52,4 +52,29 @@ const newTask = async (req: RequestNewTask, res: Response<ResponseNewTask>) => {
     }
 
 }
-export { newTask }
+
+interface RequestPending extends Request {
+    body: undefined
+}
+interface ResponsePending {
+    error?: string,
+    tasks?: TaskType[]
+}
+const pending = async (_req: RequestPending, res: Response<ResponsePending>) => {
+
+    try {
+        const pending = await TaskModel.find({ finished: false }).lean().exec();
+
+        res.status(200).send({
+            tasks: pending
+        })
+    } catch (e) {
+        if (e instanceof Error)
+            res.status(500).send({ error: `Internal Error: ${e.message}` })
+        else
+            res.status(500).send({ error: `Internal Error: Unknown` })
+    }
+
+}
+
+export { newTask, pending }
