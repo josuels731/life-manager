@@ -1,11 +1,15 @@
 import { Router } from "express";
-import { newTask, pending } from "../../controller/tasks/tasks";
+import { create, read, readFinished, readNotFinished, remove, update } from "../../controller/tasks/tasks";
 import tags from "./tags";
 
 const tasks = Router();
 
-tasks.post('/new', newTask);
-tasks.get('/pending', pending);
+tasks.post('/create', create);
+tasks.get('/read', read);
+tasks.get('/read/finished', readFinished);
+tasks.get('/read/not-finished', readNotFinished);
+tasks.get('/remove', remove);
+tasks.get('/update', update);
 tasks.use('/tags', tags)
 
 export default tasks;

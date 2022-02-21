@@ -1,7 +1,7 @@
 import { Response, Request } from 'express'
 import Joi from 'joi';
 import { Types } from 'mongoose';
-import UserModel from '../model/users/User';
+import UserModel from '../../model/users/User';
 
 interface RequestLogin extends Request {
     body: {
@@ -43,7 +43,7 @@ const login = async (req: RequestLogin, res: Response<ResponseLogin>) => {
 
 }
 
-interface RequestNewUser extends Request {
+interface RequestCreate extends Request {
     body: {
         name: string,
         email: string,
@@ -52,14 +52,14 @@ interface RequestNewUser extends Request {
         birth: Date,
     }
 }
-interface ResponseNewUser {
+interface ResponseCreate {
     error?: string,
     created?: {
         username: string,
         id: Types.ObjectId
     }
 }
-const newUser = async (req: RequestNewUser, res: Response<ResponseNewUser>) => {
+const create = async (req: RequestCreate, res: Response<ResponseCreate>) => {
 
     const schema = Joi.object({
         name: Joi.string().required(),
@@ -103,4 +103,4 @@ const newUser = async (req: RequestNewUser, res: Response<ResponseNewUser>) => {
     }
 
 }
-export { login, newUser }
+export { login, create }
