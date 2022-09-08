@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node-dev src",
     "gcp-build": "tsc -p .",
-    "deploy": "cd frontend && npm run build && cd .. && gcloud app deploy"
+    "deploy": "cd frontend && npm run build && cd .. && gcloud app deploy && gcloud app browse"
   },
   "repository": {
     "type": "git",
